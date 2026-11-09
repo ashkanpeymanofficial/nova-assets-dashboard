@@ -20,6 +20,10 @@ A modern, sleek, and fully responsive financial dashboard built with pure HTML, 
 - Vanilla JavaScript (DOM manipulation, LocalStorage, ES6 features)
 - Google Fonts (Vazirmatn & Space Grotesk)
 
+## 🌐 Language
+
+This project is developed with a Persian (Farsi) user interface. The layout is fully RTL (Right-to-Left) optimized.
+
 ## 🚀 How to Run
 
 1. Clone the repository:
