@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova Assets | مدیریت دارایی</title>
+    <link rel="icon" type="image/jpeg" href="profile.webp">
+<link rel="apple-touch-icon" href="profile.webp">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="logo">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            <span>Nova Assets</span>
+        </div>
+        <nav>
+            <a href="#" class="nav-link active" onclick="switchTab('dashboard', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                داشبورد
+            </a>
+            <a href="#" class="nav-link" onclick="switchTab('history', this)">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                تاریخچه
+            </a>
+        </nav>
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+        <header class="header">
+            <h1 id="pageTitle">نمای کلی دارایی</h1>
+            <div class="user-badge">
+                <span>اشکان پیمان</span>
+                <img src="profile.webp" alt="Profile" class="avatar" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 fill=%22%237c3aed%22/><text x=%2250%22 y=%2255%22 font-size=%2240%22 text-anchor=%22middle%22 fill=%22white%22>ا</text></svg>'">
+            </div>
+        </header>
+
+        <!-- ================= TAB: DASHBOARD ================= -->
+        <div id="tab-dashboard" class="tab-content">
+            
+            <section class="top-section">
+                <!-- PnL Stats -->
+                <div class="pnl-stats">
+                    <div class="stat-box profit">
+                        <div class="stat-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                        </div>
+                        <div>
+                            <span class="stat-label">کل سود (تحقق‌یافته)</span>
+                            <strong class="stat-value" id="totalProfit">0</strong>
+                        </div>
+                    </div>
+                    <div class="stat-box loss">
+                        <div class="stat-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg>
+                        </div>
+                        <div>
+                            <span class="stat-label">کل زیان (تحقق‌یافته)</span>
+                            <strong class="stat-value" id="totalLoss">0</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wallet Box -->
+                <div class="wallet-card">
+                    <!-- اسم عکس: wallet-bg.jpg -->
+                    <div class="wallet-bg" style="background-image: url('wallet-bg.png');"></div>
+                    <div class="wallet-glass"></div>
+                    <div class="wallet-content">
+                        <span class="wallet-label">ارزش کل کیف پول</span>
+                        <h2 class="wallet-amount" id="totalBalance">0</h2>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bottom-section">
+                <!-- Assets List -->
+                <div class="panel">
+                    <div class="panel-header">
+                        <h2>دارایی‌های من</h2>
+                    </div>
+                    <div class="asset-list" id="assetList"></div>
+                </div>
+
+                <!-- Add Asset Form -->
+                <div class="panel">
+                    <div class="panel-header">
+                        <h2>افزودن دارایی</h2>
+                    </div>
+                    <form id="addAssetForm" class="add-form">
+                        
+                        <div class="form-row">
+                            <label>نوع دارایی</label>
+                            <div class="css-select" id="assetTypeSelect">
+                                <div class="css-select-trigger">
+                                    <span id="selectLabel">طلا (گرم)</span>
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                                </div>
+                                <div class="css-select-options">
+                                    <div class="css-option selected" data-value="gold">طلا (گرم)</div>
+                                    <div class="css-option" data-value="dollar">دلار</div>
+                                    <div class="css-option" data-value="euro">یورو</div>
+                                    <div class="css-option" data-value="custom">ارز دلخواه (سفارشی)</div>
+                                </div>
+                                <input type="hidden" id="assetTypeInput" value="gold">
+                            </div>
+                        </div>
+                        
+                        <div class="form-row" id="customCurrencyRow" style="display: none;">
+                            <label>نام ارز</label>
+                            <input type="text" id="customCurrencyName" placeholder="مثلاً: لیر ترکیه">
+                        </div>
+
+                        <div class="form-row">
+                            <label>مقدار</label>
+                            <input type="number" id="assetAmount" placeholder="e.g. 10" step="any" required>
+                        </div>
+                        <div class="form-row">
+                            <label id="buyPriceLabel">قیمت خرید هر گرم (تومان)</label>
+                            <input type="number" id="assetBuyPrice" placeholder="e.g. 3000000" required>
+                        </div>
+                        
+                        <!-- قیمت فعلی (برای محاسبه سود/زیان کاغذی) -->
+                        <div class="form-row">
+                            <label id="currentPriceLabel">قیمت فعلی بازار (تومان)</label>
+                            <input type="number" id="assetCurrentPrice" placeholder="e.g. 3200000" required>
+                        </div>
+
+                        <button type="submit" class="btn-add">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                            ثبت در دارایی‌ها
+                        </button>
+                    </form>
+                </div>
+            </section>
+        </div>
+
+        <!-- ================= TAB: HISTORY ================= -->
+        <div id="tab-history" class="tab-content" style="display: none;">
+            <div class="panel" style="height: 100%;">
+                <div class="panel-header">
+                    <h2>تاریخچه تراکنش‌ها</h2>
+                </div>
+                <div class="history-list" id="historyList"></div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Modal for Selling/Editing -->
+    <div class="modal-overlay" id="actionModal">
+        <div class="modal">
+            <h3 id="modalTitle">ویرایش اطلاعات</h3>
+            
+            <div class="form-row" id="sellAmountRow">
+                <label>مقدار فروش</label>
+                <input type="number" id="modalAmount" step="any">
+            </div>
+            
+            <div class="form-row" id="editBuyPriceRow">
+                <label>ویرایش قیمت خرید (تومان)</label>
+                <input type="number" id="modalBuyPrice" step="any">
+            </div>
+
+            <div class="form-row" id="editCurrentPriceRow">
+                <label>قیمت فعلی بازار (تومان)</label>
+                <input type="number" id="modalCurrentPrice" step="any">
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn-cancel" onclick="closeModal()">انصراف</button>
+                <button class="btn-save" onclick="saveModal()">ثبت</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
