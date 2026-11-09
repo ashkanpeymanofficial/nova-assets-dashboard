@@ -28,4 +28,4 @@ This project is developed with a Persian (Farsi) user interface. The layout is f
 
 1. Clone the repository:
    `bash
-   git clone https://github.com/AshkanPeyman/nova-assets-dashboard.git
+   git clone [https://github.com/AshkanPeyman/nova-assets-dashboard.git](https://ashkanpeymanofficial.github.io/nova-assets-dashboard/)
