@@ -2,7 +2,7 @@
 
 A modern, sleek, and fully responsive financial dashboard built with pure HTML, CSS, and Vanilla JavaScript. This web app helps users track their assets (Gold, USD, EUR, or custom currencies), calculate real-time profit/loss, and manage their transaction history.
 
-![Nova Assets Preview](https://your-image-link-here.jpg) *(عکس اسکرین‌شات پروژه‌ت رو اینجا بذار)*
+![Nova Assets Preview](preview.png)
 
 ## ✨ Features
 
